@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="JSON-to-Table/JSON-to-Table.min.1.0.0.js"></script>
+    <script src="elasticsearch-js/elasticsearch.min.js"></script>
+    <script src="elasticsearch-js/elasticsearch.jquery.min.js"></script>
+</head>
+<body>
+<button onclick=ivan()>Иван</button>
+<button onclick=sergey()>Сергей</button>
+<button onclick=dmitriy()>Дмитрий</button>
+<p id="my"></p>
+<p id="my1"></p>
+<script>
+
+    var client = new $.es.Client({
+        hosts: 'localhost:9200?filter_path=hits.hits._source'
+    });
+
+    function search(name) {
+        client.search({
+            index: 'heisen',
+            type: 'command',
+            body: {
+                query: {
+                    match: {
+                        FirstName: name
+                    }
+                }
+            }
+        }).then(function (resp) {
+            var str = "[";
+            for(i = 0; i < resp.hits.hits.length; i++) {
+                str += JSON.stringify(resp.hits.hits[i]._source) + ","
+            };
+            str = str.slice(0, -1) + "]"
+            $('#my1').createTable(JSON.parse(str));
+        }, function (err) {
+            console.trace(err.message);
+        });
+    }
+
+    function ivan() {
+        var name = "Иван";
+        search(name);
+    }
+
+    function sergey() {
+        var name = "Сергей";
+        search(name);
+    }
+
+    function dmitriy() {
+        var name = "Дмитрий";
+        search(name);
+    }
+
+</script>
+</body>
+</html>
