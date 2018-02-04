@@ -31,12 +31,9 @@
                 }
             }
         }).then(function (resp) {
-            var str = "[";
-            for(i = 0; i < resp.hits.hits.length; i++) {
-                str += JSON.stringify(resp.hits.hits[i]._source) + ","
-            };
-            str = str.slice(0, -1) + "]"
-            $('#my1').createTable(JSON.parse(str));
+            $('#my1').createTable(resp.hits.hits.map(function(name, i) {
+                return resp.hits.hits[i]._source;
+            }));
         }, function (err) {
             console.trace(err.message);
         });
