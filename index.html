@@ -2,19 +2,23 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link href="jQuery-Autocomplete/style.css" rel="stylesheet" media="all">
     <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="JSON-to-Table/JSON-to-Table.min.1.0.0.js"></script>
     <script src="elasticsearch-js/elasticsearch.min.js"></script>
     <script src="elasticsearch-js/elasticsearch.jquery.min.js"></script>
+    <script src="jQuery-Autocomplete/jquery.autocomplete.min.js"></script>
 </head>
 <body>
 <button onclick=ivan()>Иван</button>
 <button onclick=sergey()>Сергей</button>
 <button onclick=dmitriy()>Дмитрий</button>
 <p id="my"></p>
-<p id="my1"></p>
+<input type="text" id="autocomplete"/>
 <script>
-
+// =============================================================================
+//                              Поиск по кнопкам
+// =============================================================================
     var client = new $.es.Client({
         hosts: 'localhost:9200?filter_path=hits.hits._source'
     });
@@ -31,7 +35,7 @@
                 }
             }
         }).then(function (resp) {
-            $('#my1').createTable(resp.hits.hits.map(function(name, i) {
+            $('#my').createTable(resp.hits.hits.map(function(name, i) {
                 return resp.hits.hits[i]._source;
             }));
         }, function (err) {
@@ -54,6 +58,41 @@
         search(name);
     }
 
+// =============================================================================
+//                              Строка поиска
+// =============================================================================
+    var tags = [
+        {"value": "Frontend"},
+        {"value": "Backend"},
+        {"value": "Marketing"},
+        {"value": "Desing"},
+        {"value": "DataScience"}
+    ];
+
+    $('#autocomplete').autocomplete({
+        lookup: tags,
+        showNoSuggestionNotice: true,
+        onSelect: function (suggestion) {
+            client.search({
+                index: 'heisen',
+                type: 'command',
+                body: {
+                    query: {
+                        match: {
+                            tags: suggestion.value
+                        }
+                    }
+                }
+            }).then(function (resp) {
+                $('#my').createTable(resp.hits.hits.map(function(suggestion, i) {
+                    return resp.hits.hits[i]._source;
+                }));
+            }, function (err) {
+                console.trace(err.message);
+            });
+        }
+    });
+// =============================================================================
 </script>
 </body>
 </html>
