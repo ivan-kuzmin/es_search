@@ -1,98 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-    <meta charset="utf-8">
-    <link href="jQuery-Autocomplete/style.css" rel="stylesheet" media="all">
+    <meta charset="UTF-8">
+    <link href="css/search.css" rel="stylesheet" media="all">
+    <link href="css/table.css" rel="stylesheet" media="all">
     <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="JSON-to-Table/JSON-to-Table.min.1.0.0.js"></script>
     <script src="elasticsearch-js/elasticsearch.min.js"></script>
     <script src="elasticsearch-js/elasticsearch.jquery.min.js"></script>
-    <script src="jQuery-Autocomplete/jquery.autocomplete.min.js"></script>
 </head>
 <body>
-<button onclick=ivan()>Иван</button>
-<button onclick=sergey()>Сергей</button>
-<button onclick=dmitriy()>Дмитрий</button>
-<p id="my"></p>
-<input type="text" id="autocomplete"/>
-<script>
-// =============================================================================
-//                              Поиск по кнопкам
-// =============================================================================
-    var client = new $.es.Client({
-        hosts: 'localhost:9200?filter_path=hits.hits._source'
-    });
-
-    function search(name) {
-        client.search({
-            index: 'heisen',
-            type: 'command',
-            body: {
-                query: {
-                    match: {
-                        FirstName: name
-                    }
-                }
-            }
-        }).then(function (resp) {
-            $('#my').createTable(resp.hits.hits.map(function(name, i) {
-                return resp.hits.hits[i]._source;
-            }));
-        }, function (err) {
-            console.trace(err.message);
+    <div class="input-wrapper" data-text="">
+        <input id="search_input" type="text" placeholder="Search…" autocomplete="off">
+    </div>
+    <p id="my" style="color: white;"></p>
+    <div id="qr"></div>
+    <script>
+        var client = new $.es.Client({
+            hosts: 'localhost:9200?filter_path=hits.hits._source'
         });
-    }
 
-    function ivan() {
-        var name = "Иван";
-        search(name);
-    }
+        var input = document.body.children[0];
+        input.oninput = function() {
+            if ($('input').val() != "")
+                search($('input').val());
+            else
+                $('#my').text('')
+        };
 
-    function sergey() {
-        var name = "Сергей";
-        search(name);
-    }
-
-    function dmitriy() {
-        var name = "Дмитрий";
-        search(name);
-    }
-
-// =============================================================================
-//                              Строка поиска
-// =============================================================================
-    var tags = [
-        {"value": "Frontend"},
-        {"value": "Backend"},
-        {"value": "Marketing"},
-        {"value": "Desing"},
-        {"value": "DataScience"}
-    ];
-
-    $('#autocomplete').autocomplete({
-        lookup: tags,
-        showNoSuggestionNotice: true,
-        onSelect: function (suggestion) {
+        function search(name) {
+            name = "*"+name+"*"
             client.search({
-                index: 'heisen',
-                type: 'command',
+                index: 'skoltech',
+                type: 'professora',
                 body: {
                     query: {
-                        match: {
-                            tags: suggestion.value
+                        query_string: {
+                            fields: ["firstname^3", "lastname^4", "position^2", "center"],
+                            query: name
                         }
                     }
                 }
             }).then(function (resp) {
-                $('#my').createTable(resp.hits.hits.map(function(suggestion, i) {
+                $('#my').createTable(resp.hits.hits.map(function(name, i) {
+                    delete resp.hits.hits[i]._source.crei
                     return resp.hits.hits[i]._source;
                 }));
             }, function (err) {
                 console.trace(err.message);
             });
         }
-    });
-// =============================================================================
-</script>
+        // $.post('https://qrcode-monkey.p.mashape.com/qr/custom', {
+        //     "data":"https://www.qrcode-monkey.com",
+        //     "config":{
+        //         "body":"circle",
+        //         "logo":"#facebook"
+        //     },
+        //     "size":300,
+        //     "download":false,
+        //     "file":"svg"
+        // }, function(data) {
+        //     $('#qr').text(data);
+        // });
+    </script>
+    <script  src="js/search.js"></script>
 </body>
 </html>
