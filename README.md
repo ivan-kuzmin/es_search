@@ -1,5 +1,6 @@
 # es_search
-```curl -XPOST "http://localhost:9200/_bulk" -H 'Content-Type: application/json' -d'
+```
+curl -XPOST "http://localhost:9200/_bulk" -H 'Content-Type: application/json' -d'
 {"create": {"_index": "skoltech", "_type": "professora", "_id": 1}}
 {"link": "<a class=\"people-img-a\" href=\"http://faculty.skoltech.ru/people/sergeyabaimov\"><img alt=\"sergeyabaimov\" src=\"http://www.skoltech.ru/app/data/uploads/sites/19/2014/07/sergeyabaimov_avatar_1405519781-96x96.gif\" class=\"avatar avatar-96 photo\" height=\"auto\" width=\"96\"></a>", "firstname": "Сергей", "lastname": "Абаимов", "position": "Assistant Professor", "crei": "crei204", "center": "Design, Manufacturing and Materials"}
 {"create": {"_index": "skoltech", "_type": "professora", "_id": 2}}
