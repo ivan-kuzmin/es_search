@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link href="css/search.css" rel="stylesheet" media="all">
     <link href="css/table.css" rel="stylesheet" media="all">
-    <script src="js/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="JSON-to-Table/JSON-to-Table.min.1.0.0.js"></script>
     <script src="elasticsearch-js/elasticsearch.min.js"></script>
     <script src="elasticsearch-js/elasticsearch.jquery.min.js"></script>
@@ -19,6 +19,23 @@
             hosts: 'https://search-cerebro-xg6oa5f4gmcispwqp3kn3p6mta.us-west-2.es.amazonaws.com'
         });
 
+        var transliterate = (
+            function() {
+                var
+                    rus = "щ   ш  ч  ц  ю  я  ё  ж  ъ  ы  э  а б в г д е з и й й к л м н о п р с т у ф х ь".split(/ +/g),
+                    eng = "shh sh ch cz yu ya yo zh `` y' e` a b v g d e z i y j k l m n o p r s t u f x `".split(/ +/g)
+                ;
+                return function(text, engToRus) {
+                    var x;
+                    for(x = 0; x < rus.length; x++) {
+                        text = text.split(engToRus ? eng[x] : rus[x]).join(engToRus ? rus[x] : eng[x]);
+                        text = text.split(engToRus ? eng[x].toUpperCase() : rus[x].toUpperCase()).join(engToRus ? rus[x].toUpperCase() : eng[x].toUpperCase());
+                    }
+                    return text;
+                }
+            }
+        )();
+
         var input = document.body.children[0];
         input.oninput = function() {
             if ($('input').val() != "")
@@ -28,7 +45,8 @@
         };
 
         function search(name) {
-            name = "*"+name+"*"
+            name = "*"+transliterate(name)+"* OR *"+transliterate(transliterate(name), true)+"*"
+            // alert(name);
             client.search({
                 index: 'skoltech',
                 type: 'professora',
@@ -50,7 +68,7 @@
                     }));
                 } else {
                     $('#my').text('No results');
-                    $('#my').attr('style', 'text-align: center; color: white');
+                    $('#my').attr('style', 'text-align: center; color: white;');
                 }
             }, function (err) {
                 console.trace(err.message);
