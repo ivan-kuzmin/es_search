@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link href="css/search.css" rel="stylesheet" media="all">
     <link href="css/table.css" rel="stylesheet" media="all">
-    <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="JSON-to-Table/JSON-to-Table.min.1.0.0.js"></script>
     <script src="elasticsearch-js/elasticsearch.min.js"></script>
     <script src="elasticsearch-js/elasticsearch.jquery.min.js"></script>
@@ -46,7 +46,6 @@
 
         function search(name) {
             name = "*"+transliterate(name)+"* OR *"+transliterate(transliterate(name), true)+"*"
-            // alert(name);
             client.search({
                 index: 'skoltech',
                 type: 'professora',
