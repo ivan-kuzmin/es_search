@@ -1,9 +1,25 @@
-body {
-  background-color: #222;
+html, body {
+  background-color: #222 !important;
+  margin: 0;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.section {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
 }
 
 .input-wrapper {
-  width: 500px;
+  width: 60%;
   margin: 50px auto;
   position: relative;
 }
@@ -33,9 +49,39 @@ input {
   outline: none;
   width: auto;
   min-width: 100%;
-  font-size: 1.5rem;
   line-height: 3em;
   font-family: Roboto, Arial, sans-serif;
   border-bottom: 3px solid #333333;
   background-color: transparent;
+}
+
+footer {
+    background: #2B2D42 !important;
+    color: #EDF2F4;
+    width: 100%;
+    padding: 1.5rem 1.5rem 2rem !important;
+}
+
+#avatar {
+    border-radius: 200px;
+    width: 90px;
+    height: auto;
+}
+#avatar-title {
+    padding-top: 25px;
+}
+#links {
+    min-width: 400px;
+}
+.icons a {
+    margin: 0 25px;
+}
+.icons #github-icon {
+    height: 36px;
+}
+.icons #heisen-icon {
+    height: 40px;
+}
+.icons #telegram-icon {
+    height: 40px;
 }

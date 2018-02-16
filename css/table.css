@@ -48,6 +48,10 @@ table tr td:first-child{
     text-align: left;
     padding-left: 20px;
     border-left: 0;
+    width: 49px;
+}
+table tr td:nth-child(2){
+    width: 121px;
 }
 table tr td {
     padding: 2px 15px;
@@ -56,6 +60,7 @@ table tr td {
     border-bottom: 1px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
     background: #fafafa;
+    vertical-align: middle;
 }
 table tr.even td{
     background: #f6f6f6;
@@ -74,6 +79,7 @@ table tr:hover td{
 }
 table img {
     border-radius: 50px;
+    min-width: 90px;
 }
 table tbody tr{
     height: 105px;
