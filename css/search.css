@@ -59,7 +59,7 @@ footer {
     background: #2B2D42 !important;
     color: #EDF2F4;
     width: 100%;
-    padding: 1.5rem 1.5rem 2rem !important;
+    padding: 1rem 1.5rem 1rem !important;
 }
 
 #avatar {
@@ -77,11 +77,14 @@ footer {
     margin: 0 25px;
 }
 .icons #github-icon {
-    height: 36px;
+    height: 30px;
 }
 .icons #heisen-icon {
-    height: 40px;
+    height: 34px;
 }
 .icons #telegram-icon {
-    height: 40px;
+    height: 34px;
+}
+a.button {
+    margin: 8px 0;
 }
