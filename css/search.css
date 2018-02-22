@@ -10,6 +10,15 @@ html, body {
   height: 100%;
 }
 
+.hero {
+    flex: 0 0 auto;
+}
+
+.hero h1 {
+    color: #ddd !important;
+    font-family: Roboto, Arial, sans-serif !important;
+}
+
 .section {
   flex: 1 0 auto;
 }
@@ -18,9 +27,13 @@ html, body {
   flex: 0 0 auto;
 }
 
+.search_section {
+    padding: 0 1.5rem 3rem !important;
+}
+
 .input-wrapper {
   width: 60%;
-  margin: 50px auto;
+  margin: 0 auto;
   position: relative;
 }
 
@@ -41,6 +54,12 @@ html, body {
   color: transparent;
 }
 
+#example {
+    display: block;
+    margin: 0 auto 50px;
+    font-size: 12px;
+}
+
 input {
   color: #ddd;
   border: none;
@@ -57,9 +76,14 @@ input {
 
 footer {
     background: #2B2D42 !important;
+    font-family: Roboto, Arial, sans-serif !important;
     color: #EDF2F4;
     width: 100%;
-    padding: 1rem 1.5rem 1rem !important;
+    padding: 0.5rem 1.5rem 0.5rem !important;
+}
+
+#my {
+    color: white;
 }
 
 #avatar {
@@ -68,10 +92,62 @@ footer {
     height: auto;
 }
 #avatar-title {
-    padding-top: 25px;
+    padding: 10px 0 0 7px;
+    vertical-align: top;
 }
-#links {
-    min-width: 400px;
+#support {
+    padding-top: 20px;
+    font-size: 12px;
+}
+#button_patreon {
+    background-color: rgb(249, 104, 84);
+    -webkit-backface-visibility: hidden;
+    background-color: rgb(249, 104, 84);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: rgb(249, 104, 84);
+    border-right-color: rgb(249, 104, 84);
+    border-bottom-color: rgb(249, 104, 84);
+    border-left-color: rgb(249, 104, 84);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-weight: 700;
+    padding-top: 1rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition-delay: initial;
+    transition-property: all;
+    -webkit-user-select: none;
+    white-space: inherit;
+    cursor: pointer;
+    width: 100%;
+    color: rgb(255, 255, 255) !important;
+    font-size: 1rem !important;
+}
+.icons {
+    padding-top: 5px;
 }
 .icons a {
     margin: 0 25px;
@@ -82,8 +158,8 @@ footer {
 .icons #heisen-icon {
     height: 34px;
 }
-.icons #telegram-icon {
-    height: 34px;
+.icons #patreon-icon {
+    height: 36px;
 }
 a.button {
     margin: 8px 0;

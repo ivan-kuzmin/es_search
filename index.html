@@ -17,40 +17,54 @@
 </head>
 <body>
     <div class="wrapper">
-        <section class="section">
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title is-6 has-text-centered">
+                        Find your soulmate in Skoltech
+                    </h1>
+                </div>
+            </div>
+        </section>
+        <section class="section search_section">
             <div class="container">
                 <div class="input-wrapper is-size-4" data-text="">
-                    <input id="search_input" type="text" placeholder="Search…" autocomplete="off">
+                    <input id="search_input" type="text" placeholder="Search…" autocomplete="off" autofocus>
                 </div>
-                <p id="my" style="color: white;"></p>
+                <span id="example" class="has-text-centered">For example, type "Ivan"</span>
+                <p id="my"></p>
             </div>
         </section>
         <footer class="footer">
-            <div class="container columns">
-                <div class="column is-2 is-offset-1">
-                    <figure class="image is-3by4 is-pulled-right">
+            <div class="columns">
+                <div class="column is-4 has-text-centered">
+                    <figure class="image is-3by4 is-inline-block">
                         <a href="https://ivan-kuzmin.github.io" target="_blank"><img id="avatar" src="images/Foto_black.jpg" alt="Placeholder image"></a>
                     </figure>
+                    <div id="avatar-title" class="has-text-left is-inline-block">
+                        <h1 class="title has-text-white is-5">
+                            Ivan Kuzmin
+                        </h1>
+                        <h2 class="subtitle has-text-white is-6">
+    						woof@heisen.me
+    					</h2>
+                    </div>
                 </div>
-                <div id="avatar-title" class="column">
-					<h1 class="title has-text-white is-6">
-						Kuzmin Ivan Sergeevich
-					</h1>
-					<h2 class="subtitle has-text-white is-6">
-						<ul>
-							<li>Email: vania_kuzmin@mail.ru</li>
-                            <li>Phone: +7 926 097 34 66</li>
-						</ul>
-					</h2>
-				</div>
-                <div id="links" class="content column has-text-centered">
+                <div id="support" class="column is-4 has-text-centered">
+                    Supported by <b>Heisen</b>
+                    <a id="button_patreon" href="https://www.patreon.com/bePatron?c=1443438" target="_blank">
+                        <div>
+                            <span>Help the project – become a patron</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="column is-4 has-text-centered">
                     <div class="icons">
                         <a href="http://github.com/ivan-kuzmin" target="_blank"><img id="github-icon" src="images/github.png"></a>
                         <a href="https://heisen.me" target="_blank"><img id="heisen-icon" src="images/heisen_logo_white.png" alt=""></a>
-                        <a href="http://t.me/onedivan" target="_blank"><img id="telegram-icon" src="images/telegram_white.png" alt=""></a>
+                        <a href="https://patreon.com/heisen" target="_blank"><img id="patreon-icon" src="images/patreon.png"></a>
                     </div>
                     <a class="button is-dark is-inverted is-outlined" href="https://ivan-kuzmin.github.io" target="_blank">Developed by Ivan Kuzmin</a>
-                    <div>woof@heisen.me</div>
                 </div>
             </div>
         </footer>
