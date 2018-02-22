@@ -98,6 +98,7 @@ footer {
 #support {
     padding-top: 20px;
     font-size: 12px;
+    margin: auto;
 }
 #button_patreon {
     background-color: rgb(249, 104, 84);
