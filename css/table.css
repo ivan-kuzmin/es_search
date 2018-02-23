@@ -88,4 +88,22 @@ table tbody tr{
     #my th:nth-child(n+4), #my td:nth-child(n+4) {
         display: none !important;
     }
+    footer .column:first-child {
+        padding-top: 20px;
+        padding-bottom: 0;
+    }
+    #avatar {
+        width: 60px;
+    }
+    #avatar-title h1 {
+        font-size: 14px;
+        padding-top: 10px;
+    }
+    #support {
+        margin-bottom: 20px;
+    }
+    #button_patreon {
+        font-size: 10px !important;
+        padding: 0.5rem 1rem;
+    }
 }
