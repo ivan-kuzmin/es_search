@@ -84,3 +84,8 @@ table img {
 table tbody tr{
     height: 105px;
 }
+@media screen and (max-width: 768px) {
+    #my th:nth-child(n+4), #my td:nth-child(n+4) {
+        display: none !important;
+    }
+}
