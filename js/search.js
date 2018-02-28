@@ -42,7 +42,7 @@ function search(name) {
         body: {
             query: {
                 query_string: {
-                    fields: ["name^5", "lastname^4", "position^3", "center^2", "bio"],
+                    fields: ["name^4", "lastname^4", "position^3", "center^2", "bio"],
                     query: name
                 }
             }
@@ -51,6 +51,7 @@ function search(name) {
         if (resp.hits.total != 0) {
             $('#my').createTable(resp.hits.hits.map(function(name, i) {
                 delete resp.hits.hits[i]._source.crei
+                delete resp.hits.hits[i]._source.bio
                 resp.hits.hits[i]._source.name += ' ' + resp.hits.hits[i]._source.lastname
                 delete resp.hits.hits[i]._source.lastname
                 return resp.hits.hits[i]._source;
