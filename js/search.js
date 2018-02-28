@@ -38,7 +38,7 @@ function search(name) {
     name = "*"+transliterate(name)+"* OR *"+transliterate(transliterate(name), true)+"*"
     client.search({
         index: 'skoltech',
-        type: 'professora',
+        type: 'professors',
         body: {
             query: {
                 query_string: {
