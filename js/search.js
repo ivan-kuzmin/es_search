@@ -42,7 +42,7 @@ function search(name) {
         body: {
             query: {
                 query_string: {
-                    fields: ["name^4", "lastname^3", "position^2", "center"],
+                    fields: ["name^5", "lastname^4", "position^3", "center^2", "bio"],
                     query: name
                 }
             }
