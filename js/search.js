@@ -35,7 +35,7 @@ input.oninput = function() {
 };
 
 function search(name) {
-    name = "*"+transliterate(name)+"* OR *"+transliterate(transliterate(name), true)+"*"
+    name = "("+transliterate(name)+") OR ("+transliterate(transliterate(name), true)+")"
     client.search({
         index: 'skoltech',
         type: 'professors',
@@ -43,7 +43,8 @@ function search(name) {
             query: {
                 query_string: {
                     fields: ["name^5", "lastname^4", "position^3", "center^2", "bio"],
-                    query: name
+                    query: name,
+                    "analyzer": "english"
                 }
             }
         }
