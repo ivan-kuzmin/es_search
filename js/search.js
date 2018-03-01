@@ -12,7 +12,7 @@ var client = new $.es.Client({
 var transliterate = (
     function() {
         var
-        rus = "щ   ш  ч  ц  ю  я  ё  ж  ъ  ы  э  а б в г д е з и й к л м н о п р с т у ф х ь".split(/ +/g),
+        rus = "щ   ш  ч  ц  ю  я  ё  ж  ъ  ы э  а б в г д е з и й к л м н о п р с т у ф х ь".split(/ +/g),
         eng = "shh sh ch cz yu ya yo zh `` y e` a b v g d e z i j k l m n o p r s t u f x `".split(/ +/g)
         ;
         return function(text, engToRus) {
@@ -35,7 +35,7 @@ input.oninput = function() {
 };
 
 function search(name) {
-    name = "("+transliterate(name)+") OR ("+transliterate(transliterate(name), true)+")"
+    name = "*"+transliterate(name)+"* OR *"+transliterate(transliterate(name), true)+"*"
     client.search({
         index: 'skoltech',
         type: 'professors',
@@ -43,8 +43,7 @@ function search(name) {
             query: {
                 query_string: {
                     fields: ["name^5", "lastname^4", "position^3", "center^2", "bio"],
-                    query: name,
-                    "analyzer": "english"
+                    query: name
                 }
             }
         }
